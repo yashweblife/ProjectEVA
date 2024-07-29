@@ -1,16 +1,27 @@
 import { Message, Tool, ToolCall } from "ollama";
 import { HomeStateMachine } from "../HSM/HomeStateMachine";
 const homeState = new HomeStateMachine()
-async function get_current_time() {
-    const date = new Date().toLocaleTimeString()
-    console.log(date)
-    return (date);
+/**
+ * Returns the current time as a string.
+ *
+ * @returns {Promise<string>} The current time as a string.
+ */
+async function get_current_time(): Promise<string> {
+    const currentTime: string = new Date().toLocaleTimeString();
+    return currentTime;
 }
-async function get_current_date() {
-    const date = new Date().toLocaleDateString()
-    console.log(date)
-    return (date);
+
+/**
+ * Returns the current date as a string.
+ *
+ * @returns {Promise<string>} The current date as a string.
+ */
+async function get_current_date(): Promise<string> {
+    const date: string = new Date().toLocaleDateString();
+    console.log(date);
+    return date;
 }
+
 async function get_todo() {
     const output = await fetch('https://jsonplaceholder.typicode.com/todos/1')
     const test = await output.json()
@@ -23,19 +34,27 @@ async function add_lamp({name}:{name:string}) {
 async function get_home_state(){
     return(JSON.stringify(homeState.getData()))
 }
-async function toggle_lamp({ state, name='lamp' }: { state: ('on' | 'off' | 'blink'), name?: string }) {
-    try{
-        const test = await fetch('http://192.168.0.29/' + state)
-        const test2 = await test.text()
-        console.log(test2)
-        homeState.setLamp(name, state === 'on')
-        return (test2)
-    } catch(e){
-        console.log(e)
-        return('An Error Has Occured')
+async function toggle_lamp({ state, name = 'lamp' }: { state: 'on' | 'off' | 'blink', name?: string }) {
+    if (!state || !['on', 'off', 'blink'].includes(state)) {
+        throw new Error('Invalid state');
+    }
+    
+    try {
+        const response = await fetch(`http://192.168.0.29/${state === 'on' ? 'on' : 'off'}`);
+        
+        if (!response.ok) {
+            throw new Error('Request failed');
+        }
+        
+        homeState.setLamp(name, state === 'on');
+        
+        return 'Success';
+    } catch (error) {
+        console.error(error);
+        
+        return 'An error occurred';
     }
 }
-
 
 const AvailableTools: any = {
     get_current_time: get_current_time,
