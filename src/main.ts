@@ -17,6 +17,11 @@ let messages = [
 	},
 ];
 
+
+const sendButton = document.querySelector('#send-button') as HTMLButtonElement
+const userInput = document.querySelector('#user-input') as HTMLInputElement
+const toast = document.querySelector('#toast') as HTMLDivElement
+
 function createUserMessage() {
 	const inp = document.querySelector('#user-input') as HTMLInputElement
 	const text = inp.value
@@ -46,6 +51,7 @@ function createAIMessage(msg: string) {
 }
 
 function handleSendMessage() {
+	if (userInput.value == '' || userInput.value == ' ') return
 	const { box, val } = createUserMessage()
 	messages.push({
 		role: 'user',
@@ -56,10 +62,8 @@ function handleSendMessage() {
 	APP();
 }
 
-const sendButton = document.querySelector('#send-button') as HTMLButtonElement
-const userInput = document.querySelector('#user-input') as HTMLInputElement
-const toast = document.querySelector('#toast') as HTMLDivElement
 userInput.addEventListener('keyup', (e) => {
+	if(userInput.value =='' || userInput.value == ' ') return
 	if (e.key === 'Enter') {
 		handleSendMessage()
 	}
