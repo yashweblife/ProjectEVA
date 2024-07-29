@@ -58,6 +58,7 @@ function handleSendMessage() {
 
 const sendButton = document.querySelector('#send-button') as HTMLButtonElement
 const userInput = document.querySelector('#user-input') as HTMLInputElement
+const toast = document.querySelector('#toast') as HTMLDivElement
 userInput.addEventListener('keyup', (e) => {
 	if (e.key === 'Enter') {
 		handleSendMessage()
@@ -66,6 +67,7 @@ userInput.addEventListener('keyup', (e) => {
 sendButton.addEventListener('click', handleSendMessage)
 
 function APP() {
+	toast.classList.remove('dis-off')
 	ollama.chat({
 		model,
 		messages,
@@ -83,7 +85,7 @@ function APP() {
 			const chat = document.querySelector('.chat') as HTMLDivElement
 			chat.appendChild(createAIMessage(res.message.content))
 		})
-
+		toast.classList.add('dis-off')
 	})
 
 }
