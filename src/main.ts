@@ -1,6 +1,6 @@
 import ollama, { ChatResponse } from 'ollama';
-import './style.css';
-import { HandleToolCalls, ToolMetaData as tools } from './tools';
+import { HandleToolCalls, ToolMetaData as tools } from './lib/Tools';
+import './style.scss';
 const model = 'llama3.1';
 let messages = [	
 	{
