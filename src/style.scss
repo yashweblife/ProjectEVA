@@ -87,18 +87,6 @@ body{
     padding: 0.5em 1em;
   }
 }
-@keyframes jump {
-  0%{
-    transform: translateY(0);
-  }
-  50%{
-    transform: translateY(-10px);
-  }
-  100%{
-    transform: translateY(0);
-  }
-
-}
 .card{
   width: 100%;
   display: flex;
@@ -110,7 +98,6 @@ body{
   padding: 0.5em 1em;
   border-radius: 1em;
   >.sender{
-    // background-color: #12282a;
     color:white;
     padding: 0.5em 1em;
     border-radius: 1em;
@@ -128,4 +115,16 @@ body{
 }
 .ai{
   align-items: flex-start;
+}
+@keyframes jump {
+  0%{
+    transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-10px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+
 }
