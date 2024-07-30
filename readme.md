@@ -36,4 +36,16 @@ npm run dev # after install is complete
 
 The `src` folder is where the magic really happens
 
-The Tools file c
+The tools folder contains 3 aspects,
+- Function definitions
+- Function registration
+- Tool Metadata
+
+### Creating Tools
+
+There can usually be 2 types of tools:
+- One that run locally and runs fully contained
+- One that fetches data from an external source
+
+
+When creating a tool, put it in an async function for consistency
